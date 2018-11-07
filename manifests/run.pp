@@ -207,19 +207,19 @@ define docker::run(
     osfamily              => $::osfamily,
   })
 
-  $sanitised_title = regsubst($title, '[^0-9A-Za-z.\-_]', '-', 'G')
+  $sanitised_title = docker::sanitised_title($title)
   if empty($depends_array) {
     $sanitised_depends_array = []
   }
   else {
-    $sanitised_depends_array = regsubst($depends_array, '[^0-9A-Za-z.\-_]', '-', 'G')
+    $sanitised_depends_array = docker::sanitised_title($depends_array)
   }
 
   if empty($after_array) {
     $sanitised_after_array = []
   }
   else {
-    $sanitised_after_array = regsubst($after_array, '[^0-9A-Za-z.\-_]', '-', 'G')
+    $sanitised_after_array = docker::sanitised_title($after_array)
   }
 
   if $::osfamily == 'windows' {
